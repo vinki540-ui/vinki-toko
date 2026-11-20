@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4F46E5">
+  <meta name="description" content="Vinki Toko - Kasir offline">
+  <title>Vinki Toko</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== KUMPULAN IKON (offline, tanpa internet) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z M12 12l9-5 M12 12L3 7 M12 12v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2 3h3l2.5 12h11l2-8H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="17" cy="20" r="1.6" fill="currentColor"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10h4v10z M10 20V4h4v16z M16 20v-7h4v7z" fill="currentColor"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3 M12 19v3 M2 12h3 M19 12h3 M4.9 4.9l2.1 2.1 M17 17l2.1 2.1 M4.9 19.1L7 17 M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12 M7 11l5 5 5-5 M4 20h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7 M3 4v5h5 M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4z M10 21h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18 M3 12h18 M3 18h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5z M4 9v11h16V9 M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z" fill="currentColor"/><path d="M12 10v5 M12 18v.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0z M7 6H4v2a3 3 0 0 0 3 3 M17 6h3v2a3 3 0 0 1-3 3 M12 14v4 M8 21h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4 M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2z M16 14.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z M8 8h8 M8 12h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3 M12 19v3 M2 12h3 M19 12h3 M5 5l2 2 M17 17l2 2 M5 19l2-2 M17 7l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" fill="currentColor"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="currentColor"/></symbol>
+      <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3 M16 4h3a1 1 0 0 1 1 1v3 M20 16v3a1 1 0 0 1-1 1h-3 M8 20H5a1 1 0 0 1-1-1v-3 M7 12h10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14 M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12 M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="app" id="app">
+
+    <!-- ===== SIDEBAR (tampil di PC) ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <img src="icon.svg" alt="Logo Vinki Toko" width="56" height="56">
+        <div class="sidebar-nama">Vinki Toko</div>
+        <div class="sidebar-sub">Kasir Offline</div>
+      </div>
+
+      <nav class="sidebar-menu" aria-label="Menu utama">
+        <button class="nav-item aktif" data-nav="beranda"><svg class="ico"><use href="#i-home"/></svg><span>Beranda</span></button>
+        <button class="nav-item" data-nav="transaksi"><svg class="ico"><use href="#i-cart"/></svg><span>Transaksi</span><kbd>F9</kbd></button>
+        <button class="nav-item" data-nav="stok"><svg class="ico"><use href="#i-box"/></svg><span>Stok</span></button>
+        <button class="nav-item" data-nav="masuk"><svg class="ico"><use href="#i-download"/></svg><span>Barang Masuk</span></button>
+        <button class="nav-item" data-nav="riwayat"><svg class="ico"><use href="#i-history"/></svg><span>Riwayat</span></button>
+        <button class="nav-item" data-nav="laporan"><svg class="ico"><use href="#i-chart"/></svg><span>Laporan</span></button>
+        <button class="nav-item" data-nav="pengaturan"><svg class="ico"><use href="#i-gear"/></svg><span>Pengaturan</span></button>
+      </nav>
+
+      <div class="sidebar-bawah">
+        <div class="tema-baris">
+          <span>Mode Tampilan</span>
+          <button class="tema-toggle" id="btnTema" aria-label="Ganti mode terang/gelap">
+            <svg class="ico"><use href="#i-sun"/></svg>
+            <svg class="ico"><use href="#i-moon"/></svg>
+          </button>
+        </div>
+        <div class="backup-info" id="infoBackup">Backup terakhir: belum pernah</div>
+      </div>
+    </aside>
+
+    <!-- ===== AREA UTAMA ===== -->
+    <div class="main">
+
+      <!-- Bar atas -->
+      <header class="topbar">
+        <button class="icon-btn only-hp" id="btnMenuHp" aria-label="Menu"><svg class="ico"><use href="#i-menu"/></svg></button>
+
+        <div class="topbar-toko">
+          <span class="toko-ikon"><svg class="ico"><use href="#i-store"/></svg></span>
+          <div>
+            <div class="toko-nama" id="namaToko">Vinki Toko</div>
+            <div class="toko-status"><span class="titik"></span><span id="statusKoneksi">Siap offline</span></div>
+          </div>
+        </div>
+
+        <div class="topbar-cari only-pc">
+          <svg class="ico"><use href="#i-search"/></svg>
+          <input type="search" id="cariGlobal" placeholder="Cari produk atau transaksi... (Ctrl + K)" autocomplete="off">
+        </div>
+
+        <div class="topbar-kanan">
+          <button class="chip only-pc" id="btnTransaksiCepat"><kbd>F9</kbd> Transaksi Cepat</button>
+          <div class="jam only-pc"><b id="jamJam">--:--</b><small id="jamTanggal">-</small></div>
+          <button class="icon-btn" id="btnNotif" aria-label="Notifikasi">
+            <svg class="ico"><use href="#i-bell"/></svg>
+            <span class="badge" id="badgeNotif" hidden>0</span>
+          </button>
+          <div class="profil">
+            <span class="avatar" id="avatarKasir">K</span>
+            <div class="only-pc">
+              <div class="profil-nama" id="namaKasir">Kasir</div>
+              <small>Kasir</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="konten" id="konten">
+
+        <!-- ================= BERANDA ================= -->
+        <section class="halaman aktif" id="hal-beranda" data-halaman="beranda">
+          <div class="sapaan">
+            <div>
+              <h1>Selamat datang, <span id="sapaNama">Kasir</span>!</h1>
+              <p>Semoga hari ini semakin sukses ✨</p>
+            </div>
+          </div>
+
+          <div class="kartu-statistik">
+            <button class="stat" data-nav="laporan">
+              <span class="stat-ikon biru"><svg class="ico"><use href="#i-wallet"/></svg></span>
+              <span class="stat-isi"><small>Omset Hari Ini</small><b id="statOmset">Rp 0</b><em id="statOmsetNaik"></em></span>
+              <svg class="ico panah"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="stat" data-nav="riwayat">
+              <span class="stat-ikon langit"><svg class="ico"><use href="#i-receipt"/></svg></span>
+              <span class="stat-isi"><small>Total Transaksi</small><b id="statTransaksi">0</b><em id="statTransaksiNaik"></em></span>
+              <svg class="ico panah"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="stat" data-nav="stok">
+              <span class="stat-ikon oranye"><svg class="ico"><use href="#i-box"/></svg></span>
+              <span class="stat-isi"><small>Total Produk</small><b id="statProduk">0</b></span>
+              <svg class="ico panah"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="stat" data-nav="stok" data-filter="menipis">
+              <span class="stat-ikon merah"><svg class="ico"><use href="#i-alert"/></svg></span>
+              <span class="stat-isi"><small>Stok Menipis</small><b class="merah" id="statMenipis">0 Produk</b></span>
+              <svg class="ico panah"><use href="#i-arrow"/></svg>
+            </button>
+            <button class="stat" data-nav="laporan">
+              <span class="stat-ikon kuning"><svg class="ico"><use href="#i-trophy"/></svg></span>
+              <span class="stat-isi"><small>Produk Terlaris</small><b id="statTerlaris">-</b><em id="statTerlarisJml"></em></span>
+              <svg class="ico panah"><use href="#i-arrow"/></svg>
+            </button>
+          </div>
+
+          <div class="grid-beranda">
+            <div class="kartu grafik-kartu">
+              <div class="kartu-kepala">
+                <h2><svg class="ico"><use href="#i-chart"/></svg> Grafik Penjualan</h2>
+                <select id="grafikRentang" aria-label="Rentang grafik">
+                  <option value="7" selected>7 Hari</option>
+                  <option value="14">14 Hari</option>
+                  <option value="30">30 Hari</option>
+                </select>
+              </div>
+              <div class="grafik-wadah"><canvas id="grafikPenjualan"></canvas></div>
+            </div>
+
+            <div class="kartu">
+              <div class="kartu-kepala"><h2><svg class="ico kuning-t"><use href="#i-bolt"/></svg> Menu Cepat</h2></div>
+              <div class="menu-cepat">
+                <button class="mc biru" data-nav="transaksi"><svg class="ico"><use href="#i-cart"/></svg><span>Scan Produk</span><kbd>F1</kbd></button>
+                <button class="mc langit" data-nav="stok"><svg class="ico"><use href="#i-box"/></svg><span>Kelola Stok</span><kbd>F2</kbd></button>
+                <button class="mc hijau" data-nav="masuk"><svg class="ico"><use href="#i-download"/></svg><span>Barang Masuk</span><kbd>F3</kbd></button>
+                <button class="mc oranye" data-nav="riwayat"><svg class="ico"><use href="#i-history"/></svg><span>Riwayat Transaksi</span><kbd>F4</kbd></button>
+              </div>
+            </div>
+
+            <div class="kartu only-pc">
+              <div class="kartu-kepala"><h2>Transaksi Terbaru</h2><button class="link" data-nav="riwayat">Lihat Semua →</button></div>
+              <ul class="daftar" id="listTransaksiTerbaru"><li class="kosong">Belum ada transaksi</li></ul>
+            </div>
+
+            <div class="kartu">
+              <div class="kartu-kepala"><h2><svg class="ico merah-t"><use href="#i-alert"/></svg> Stok Menipis</h2><button class="link" data-nav="stok" data-filter="menipis">Lihat Semua →</button></div>
+              <ul class="daftar" id="listStokMenipis"><li class="kosong">Belum ada data</li></ul>
+            </div>
+
+            <div class="kartu">
+              <div class="kartu-kepala"><h2><svg class="ico kuning-t"><use href="#i-trophy"/></svg> Produk Terlaris</h2><button class="link" data-nav="laporan">Lihat Semua →</button></div>
+              <ul class="daftar" id="listTerlaris"><li class="kosong">Belum ada penjualan</li></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TRANSAKSI / KASIR ================= -->
+        <section class="halaman" id="hal-transaksi" data-halaman="transaksi">
+          <h1 class="judul-hal">Transaksi</h1>
+          <div id="kasirWadah"></div>
+        </section>
+
+        <!-- ================= STOK / DAFTAR PRODUK ================= -->
+        <section class="halaman" id="hal-stok" data-halaman="stok">
+          <div class="judul-baris">
+            <h1 class="judul-hal">Stok Produk</h1>
+            <button class="btn utama" id="btnTambahProduk"><svg class="ico"><use href="#i-plus"/></svg> Tambah Produk</button>
+          </div>
+          <div class="filter-baris">
+            <input type="search" id="cariProduk" placeholder="Cari nama atau barcode..." autocomplete="off">
+            <select id="filterStok" aria-label="Filter stok">
+              <option value="semua">Semua</option>
+              <option value="menipis">Stok menipis</option>
+              <option value="habis">Stok habis</option>
+              <option value="tanpa-barcode">Tanpa barcode</option>
+            </select>
+          </div>
+          <div id="produkWadah"></div>
+        </section>
+
+        <!-- ================= BARANG MASUK ================= -->
+        <section class="halaman" id="hal-masuk" data-halaman="masuk">
+          <h1 class="judul-hal">Barang Masuk</h1>
+          <div id="masukWadah"></div>
+        </section>
+
+        <!-- ================= RIWAYAT ================= -->
+        <section class="halaman" id="hal-riwayat" data-halaman="riwayat">
+          <h1 class="judul-hal">Riwayat Transaksi</h1>
+          <div id="riwayatWadah"></div>
+        </section>
+
+        <!-- ================= LAPORAN ================= -->
+        <section class="halaman" id="hal-laporan" data-halaman="laporan">
+          <h1 class="judul-hal">Laporan</h1>
+          <div id="laporanWadah"></div>
+        </section>
+
+        <!-- ================= PENGATURAN ================= -->
+        <section class="halaman" id="hal-pengaturan" data-halaman="pengaturan">
+          <h1 class="judul-hal">Pengaturan</h1>
+          <div id="pengaturanWadah"></div>
+        </section>
+
+      </main>
+
+      <!-- ===== MENU BAWAH (tampil di HP) ===== -->
+      <nav class="bottom-nav" aria-label="Menu bawah">
+        <button class="bn-item aktif" data-nav="beranda"><svg class="ico"><use href="#i-home"/></svg><span>Beranda</span></button>
+        <button class="bn-item" data-nav="stok"><svg class="ico"><use href="#i-box"/></svg><span>Stok</span></button>
+        <button class="bn-item" data-nav="transaksi"><svg class="ico"><use href="#i-cart"/></svg><span>Transaksi</span></button>
+        <button class="bn-item" data-nav="laporan"><svg class="ico"><use href="#i-chart"/></svg><span>Laporan</span></button>
+        <button class="bn-item" data-nav="pengaturan"><svg class="ico"><use href="#i-gear"/></svg><span>Pengaturan</span></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Lapisan gelap saat sidebar dibuka di HP -->
+  <div class="tirai" id="tirai" hidden></div>
+
+  <!-- ===== MODAL: tambah / edit produk ===== -->
+  <div class="modal" id="modalProduk" hidden>
+    <div class="modal-kotak">
+      <div class="modal-kepala">
+        <h2 id="modalProdukJudul">Tambah Produk</h2>
+        <button class="icon-btn" data-tutup="modalProduk" aria-label="Tutup"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="modal-isi" id="modalProdukIsi"></div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: scanner kamera ===== -->
+  <div class="modal" id="modalScanner" hidden>
+    <div class="modal-kotak scanner-kotak">
+      <div class="modal-kepala">
+        <h2>Scan Barcode</h2>
+        <button class="icon-btn" data-tutup="modalScanner" aria-label="Tutup"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="modal-isi">
+        <div class="scanner-video-wadah">
+          <video id="scannerVideo" playsinline muted></video>
+          <div class="scanner-garis"></div>
+        </div>
+        <p class="scanner-info" id="scannerInfo">Arahkan kamera ke barcode</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL umum (nota, konfirmasi, dll.) ===== -->
+  <div class="modal" id="modalUmum" hidden>
+    <div class="modal-kotak">
+      <div class="modal-kepala">
+        <h2 id="modalUmumJudul">-</h2>
+        <button class="icon-btn" data-tutup="modalUmum" aria-label="Tutup"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="modal-isi" id="modalUmumIsi"></div>
+    </div>
+  </div>
+
+  <!-- Pesan singkat (toast) -->
+  <div class="toast" id="toast" hidden></div>
+
+  <!-- ===== SCRIPT (dibuat bertahap di langkah berikutnya) ===== -->
+  <script src="js/db.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/produk.js" defer></script>
+  <script src="js/scanner.js" defer></script>
+  <script src="js/kasir.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+  <script src="js/riwayat.js" defer></script>
+</body>
+</html>
