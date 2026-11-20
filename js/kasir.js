@@ -474,7 +474,7 @@
         App.toast('Scanner kamera belum siap', 'gagal');
         return;
       }
-      Scanner.mulai((kode) => { tambahKode(kode); }, { terus: true });
+      Scanner.mulai((kode) => { tambahKode(kode); });
     });
 
     $('#kBtnAlat').addEventListener('click', () => {

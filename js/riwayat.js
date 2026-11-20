@@ -206,7 +206,7 @@
         const p = await DB.cariBarcode(kode);
         if (p) tambahMasuk(p);
         else App.toast('Barcode ' + kode + ' belum terdaftar', 'gagal', 2500);
-      }, { terus: true });
+      });
     });
 
     $('#mHasil').addEventListener('click', (e) => {
