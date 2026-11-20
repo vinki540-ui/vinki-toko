@@ -11,7 +11,7 @@
 
   const $ = (s, r) => (r || document).querySelector(s);
 
-  const FORMAT = ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39', 'itf'];
+  const FORMAT = ['ean_13', 'ean_8', 'upc_a', 'upc_e'];
 
   let stream = null;
   let mesin = null;          // { jenis:'native'|'zxing', ... }
@@ -89,8 +89,7 @@
       const hints = new Map();
       hints.set(Z.DecodeHintType.POSSIBLE_FORMATS, [
         Z.BarcodeFormat.EAN_13, Z.BarcodeFormat.EAN_8,
-        Z.BarcodeFormat.UPC_A, Z.BarcodeFormat.UPC_E,
-        Z.BarcodeFormat.CODE_128, Z.BarcodeFormat.CODE_39, Z.BarcodeFormat.ITF
+        Z.BarcodeFormat.UPC_A, Z.BarcodeFormat.UPC_E
       ]);
       hints.set(Z.DecodeHintType.TRY_HARDER, true);
       reader.setHints(hints);
@@ -142,7 +141,28 @@
     if (berjalan) timer = setTimeout(putaran, mesin && mesin.jenis === 'zxing' ? 220 : 140);
   }
 
+  let calonKode = '';
+  let calonJumlah = 0;
+
+  // Cek angka pengaman barcode (EAN-8, UPC-A 12 angka, EAN-13)
+  function kodeValid(k) {
+    if (!/^\d+$/.test(k)) return false;
+    const n = k.length;
+    if (n !== 8 && n !== 12 && n !== 13) return false;
+    let jml = 0;
+    for (let i = 0; i < n - 1; i++) {
+      const d = Number(k.charAt(i));
+      jml += ((n - 1 - i) % 2 === 1) ? d * 3 : d;
+    }
+    return ((10 - (jml % 10)) % 10) === Number(k.charAt(n - 1));
+  }
+
   function ditemukan(kode) {
+    if (!kodeValid(kode)) return;
+    // Harus terbaca sama berulang kali berturut-turut, baru dipercaya
+    if (kode !== calonKode) { calonKode = kode; calonJumlah = 1; return; }
+    calonJumlah++;
+    if (calonJumlah < (kode.length === 13 ? 2 : 4)) return;
     const sekarang = Date.now();
     // Abaikan barcode yang sama kalau terbaca lagi dalam 1,5 detik
     if (kode === kodeTerakhir && sekarang - waktuTerakhir < 1500) return;
@@ -260,6 +280,7 @@
   }
 
   function berhenti() {
+    calonKode = ''; calonJumlah = 0;
     berjalan = false;
     sedangBaca = false;
     clearTimeout(timer);
