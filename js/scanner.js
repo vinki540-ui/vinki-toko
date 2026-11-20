@@ -165,7 +165,7 @@
     if (calonJumlah < (kode.length === 13 ? 2 : 4)) return;
     const sekarang = Date.now();
     // Abaikan barcode yang sama kalau terbaca lagi dalam 1,5 detik
-    if (kode === kodeTerakhir && sekarang - waktuTerakhir < 1500) return;
+    if (kode === kodeTerakhir && sekarang - waktuTerakhir < 1800) { waktuTerakhir = sekarang; return; }
     kodeTerakhir = kode;
     waktuTerakhir = sekarang;
 
