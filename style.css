@@ -524,3 +524,36 @@ select#grafikRentang { width: auto; padding: 7px 10px; font-size: 13px; font-wei
   .nota, .nota * { visibility: visible; }
   .nota { position: absolute; left: 0; top: 0; width: 100%; border: 0; }
 }
+
+/* =========================================================
+   TOMBOL SCAN MELAYANG + LAYAR KASIR (HP)
+   ========================================================= */
+.fab-scan {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--bottom-tinggi) + 14px + env(safe-area-inset-bottom));
+  z-index: 50; display: flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--utama), var(--langit));
+  color: #fff; font-weight: 800; font-size: 17px;
+  box-shadow: 0 8px 22px rgba(79, 70, 229, .45);
+}
+.fab-scan .ico { width: 26px; height: 26px; }
+.fab-scan:active { transform: translateX(-50%) scale(.96); }
+.di-transaksi .fab-scan { display: none; }
+
+.kasir-grid { display: flex; flex-direction: column; gap: 14px; }
+.kasir-grid > .kartu:first-child {
+  position: sticky; top: var(--topbar-tinggi); z-index: 30;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+}
+.kasir-cart #kBtnBayar {
+  position: sticky; bottom: calc(var(--bottom-tinggi) + env(safe-area-inset-bottom) + 8px);
+  z-index: 20; box-shadow: 0 6px 18px rgba(22, 163, 74, .4);
+}
+
+@media (min-width: 900px) {
+  .fab-scan { display: none; }
+  .kasir-grid { display: grid; }
+  .kasir-grid > .kartu:first-child { position: static; box-shadow: var(--bayang); }
+  .kasir-cart #kBtnBayar { bottom: 8px; }
+}

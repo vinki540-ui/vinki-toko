@@ -305,6 +305,7 @@
       info.classList.add('kembalian');
     }
 
+    $('#kBtnBayar').textContent = keranjang.length ? 'Bayar ' + App.rupiah(h.total) : 'Bayar';
     $('#kBtnBayar').disabled = proses || !keranjang.length || (tunai && h.bayar < h.total);
 
     if (h.total !== totalTerakhir) {

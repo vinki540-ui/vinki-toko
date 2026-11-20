@@ -25,6 +25,7 @@
   let lampuNyala = false;
   let kanvas = null;
   let sedangBaca = false;
+  let lanjutNanti = false;
 
   /* ---------- Bunyi & getar ---------- */
   function bip() {
@@ -302,7 +303,13 @@
 
   // Hemat baterai: matikan kamera kalau app disembunyikan / pindah aplikasi
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && berjalan) App.tutupModal('modalScanner');
+    if (document.hidden) {
+      if (berjalan) { lanjutNanti = true; berhenti(); }
+    } else if (lanjutNanti) {
+      lanjutNanti = false;
+      const m = document.getElementById('modalScanner');
+      if (m && !m.hidden && panggil) mulai(panggil, opsi);
+    }
   });
 
   /* ---------- Buka ke luar ---------- */

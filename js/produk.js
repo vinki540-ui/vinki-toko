@@ -218,7 +218,7 @@
       </form>
     `;
 
-    pasangFormPengait();
+    pasangFormPengait(); pulihkanDraft();
     tampilPratinjau();
     App.bukaModal('modalProduk');
     setTimeout(() => { const n = $('#pNama'); if (n) n.focus(); }, 80);
@@ -287,6 +287,36 @@
     });
   }
 
+  const KUNCI_DRAFT = 'vinki-draft-produk';
+  const BIDANG = ['pNama', 'pBarcode', 'pJual', 'pBeli', 'pStok', 'pStokMin', 'pSatuan', 'pFavorit'];
+
+  function simpanDraft() {
+    if (sedangEdit) return;
+    try {
+      const d = {};
+      BIDANG.forEach((id) => { const el = $('#' + id); if (el) d[id] = el.value; });
+      localStorage.setItem(KUNCI_DRAFT, JSON.stringify(d));
+    } catch (e) { /* abaikan */ }
+  }
+
+  function hapusDraft() {
+    try { localStorage.removeItem(KUNCI_DRAFT); } catch (e) { /* abaikan */ }
+  }
+
+  function pulihkanDraft() {
+    const form = $('#formProduk');
+    if (!form) return;
+    form.addEventListener('input', simpanDraft);
+    form.addEventListener('change', simpanDraft);
+    if (sedangEdit) return;
+    try {
+      const d = JSON.parse(localStorage.getItem(KUNCI_DRAFT) || 'null');
+      if (!d || (!d.pNama && !d.pBarcode)) return;
+      BIDANG.forEach((id) => { const el = $('#' + id); if (el && d[id] !== undefined) el.value = d[id]; });
+      App.toast('Tulisan sebelumnya dipulihkan', '', 2200);
+    } catch (e) { /* abaikan */ }
+  }
+
   async function cekBarcodeGanda() {
     const bc = $('#pBarcode');
     const info = $('#infoBarcode');
@@ -322,6 +352,7 @@
     try {
       const hasil = await DB.simpanProduk(data);
       App.toast('Tersimpan: ' + hasil.nama, 'sukses');
+      hapusDraft();
       if (tambahLagi) {
         await bukaForm(null);
       } else {

@@ -17,12 +17,14 @@
     namaKasir: 'Kasir',
     alamatToko: '',
     footerNota: 'Terima kasih sudah berbelanja',
-    lebarKertas: '58'
+    lebarKertas: '58',
+    bukaTransaksi: '0'
   };
 
   let setelan = Object.assign({}, BAWAAN);
   let halamanSekarang = 'beranda';
   let promptInstall = null;
+  const hashAwal = location.hash.slice(1);
 
   /* =========================================================
      ALAT BANTU (dipakai file lain lewat App.xxx)
@@ -121,6 +123,7 @@
   function tampil(h) {
     if (!HALAMAN.includes(h)) h = 'beranda';
     halamanSekarang = h;
+    document.body.classList.toggle('di-transaksi', h === 'transaksi');
     $$('.halaman').forEach((s) => s.classList.toggle('aktif', s.dataset.halaman === h));
     $$('.nav-item, .bn-item').forEach((b) => b.classList.toggle('aktif', b.dataset.nav === h));
     tutupSidebar();
@@ -249,6 +252,13 @@
               <option value="80" ${setelan.lebarKertas === '80' ? 'selected' : ''}>80 mm (besar)</option>
             </select>
           </div>
+          <div class="field">
+            <label for="setBuka">Saat app dibuka</label>
+            <select id="setBuka">
+              <option value="0" ${setelan.bukaTransaksi !== '1' ? 'selected' : ''}>Ke Beranda</option>
+              <option value="1" ${setelan.bukaTransaksi === '1' ? 'selected' : ''}>Langsung ke Transaksi (HP kasir)</option>
+            </select>
+          </div>
           <button class="btn utama penuh" type="submit">Simpan</button>
         </form>
       </div>
@@ -301,6 +311,7 @@
         await DB.simpanSetelan('alamatToko', $('#setAlamat').value.trim());
         await DB.simpanSetelan('footerNota', $('#setFooter').value.trim());
         await DB.simpanSetelan('lebarKertas', $('#setKertas').value);
+        await DB.simpanSetelan('bukaTransaksi', $('#setBuka').value);
         await muatSetelan();
         terapkanIdentitas();
         toast('Pengaturan tersimpan', 'sukses');
@@ -406,6 +417,10 @@
     });
 
     $('#btnTema').addEventListener('click', gantiTema);
+    $('#fabScan').addEventListener('click', () => {
+      pindah('transaksi');
+      setTimeout(() => { const k = document.getElementById('kBtnKamera'); if (k) k.click(); }, 80);
+    });
     $('#btnMenuHp').addEventListener('click', bukaSidebar);
     $('#tirai').addEventListener('click', tutupSidebar);
     $('#btnNotif').addEventListener('click', bukaNotif);
@@ -505,6 +520,7 @@
       await segarkanNotif();
       DB.mintaPenyimpananTetap();
     } catch (err) { /* abaikan */ }
+    if (setelan.bukaTransaksi === '1' && !hashAwal) pindah('transaksi');
     window.dispatchEvent(new CustomEvent('app-siap'));
   })();
 

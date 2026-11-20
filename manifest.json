@@ -9,6 +9,10 @@
   "orientation": "any",
   "background_color": "#F4F6FF",
   "theme_color": "#4F46E5",
+  "shortcuts": [
+    { "name": "Transaksi", "short_name": "Transaksi", "url": "./index.html#transaksi" },
+    { "name": "Stok", "short_name": "Stok", "url": "./index.html#stok" }
+  ],
   "icons": [
     {
       "src": "icon.svg",
