@@ -557,3 +557,41 @@ select#grafikRentang { width: auto; padding: 7px 10px; font-size: 13px; font-wei
   .kasir-grid > .kartu:first-child { position: static; box-shadow: var(--bayang); }
   .kasir-cart #kBtnBayar { bottom: 8px; }
 }
+/* =========================================================
+   LAYAR TERKUNCI (aktivasi)
+   ========================================================= */
+#layarKunci {
+  position: fixed; inset: 0; z-index: 9999; overflow-y: auto;
+  background: linear-gradient(160deg, #1E1B6B 0%, #4F46E5 60%, #38BDF8 100%);
+  display: flex; align-items: center; justify-content: center; padding: 18px;
+}
+.kunci-kotak {
+  width: 100%; max-width: 420px; background: var(--kartu); color: var(--teks);
+  border-radius: 22px; padding: 24px 20px; text-align: center;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .35);
+}
+.kunci-kotak h1 { font-size: 24px; font-weight: 800; margin: 10px 0 4px; }
+.kunci-kotak p { color: var(--teks-pudar); font-size: 14px; margin-bottom: 16px; }
+.kunci-kotak small { display: block; color: var(--teks-pudar); font-size: 12px; margin-top: 12px; }
+.kunci-label { font-size: 12px; font-weight: 700; color: var(--teks-pudar); text-align: left; margin-bottom: 6px; }
+.kunci-id {
+  font-size: 30px; font-weight: 800; letter-spacing: 3px; padding: 12px;
+  background: var(--utama-muda); color: var(--utama); border-radius: 14px; margin-bottom: 10px;
+  user-select: all;
+}
+.kunci-baris { display: flex; gap: 8px; }
+.kunci-baris .kunci-btn { flex: 1; margin-top: 0; }
+.kunci-kotak textarea {
+  width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--garis);
+  background: var(--kartu); color: var(--teks); font-family: Consolas, monospace; font-size: 13px;
+  word-break: break-all; resize: none;
+}
+.kunci-salah { color: var(--merah); font-weight: 700; font-size: 13px; min-height: 18px; margin: 8px 0 4px; text-align: left; }
+.kunci-btn {
+  display: block; width: 100%; margin-top: 8px; padding: 13px 14px; border-radius: 12px;
+  font-weight: 800; font-size: 15px; border: 0; cursor: pointer;
+}
+.kunci-btn.utama { background: var(--utama); color: #fff; }
+.kunci-btn.hijau { background: var(--hijau); color: #fff; font-size: 13px; }
+.kunci-btn.abu { background: var(--utama-muda); color: var(--utama); }
+.kunci-btn:disabled { opacity: .5; }
