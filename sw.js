@@ -5,7 +5,7 @@
 
 // Kalau kamu mengubah file app dan HP masih menampilkan versi lama,
 // naikkan angka versi ini (v1 -> v2 -> v3, dst.)
-const VERSI = 'vinki-toko-v8';
+const VERSI = 'vinki-toko-v9';
 
 // Daftar file yang disimpan. File yang belum dibuat dilewati,
 // jadi aman walaupun file JS-nya baru dibuat bertahap.
@@ -23,7 +23,9 @@ const FILE_APP = [
   './js/scanner.js',
   './js/kasir.js',
   './js/dashboard.js',
-  './js/riwayat.js'
+  './js/riwayat.js',
+  './js/laporan-bulanan.js',
+  './js/xlsx.full.min.js'
 ];
 
 // 1) INSTALL: simpan semua file ke cache

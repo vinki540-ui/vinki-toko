@@ -601,3 +601,29 @@ select#grafikRentang { width: auto; padding: 7px 10px; font-size: 13px; font-wei
 @media (min-width: 900px) {
   .di-beranda .fab-scan { display: none; }
 }
+/* =========================================================
+   LAPORAN BULANAN (PDF lewat cetak)
+   ========================================================= */
+#cetakLaporan { display: none; }
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body.cetak-laporan > *:not(#cetakLaporan) { display: none !important; }
+  body.cetak-laporan { background: #fff !important; color: #111 !important; }
+  body.cetak-laporan #cetakLaporan {
+    display: block; position: static; visibility: visible; width: 100%;
+    font-family: "Segoe UI", Arial, sans-serif; font-size: 11px; color: #111; background: #fff;
+  }
+  body.cetak-laporan #cetakLaporan * { visibility: visible; }
+  #cetakLaporan h1 { font-size: 20px; margin: 0 0 2px; }
+  #cetakLaporan h2 { font-size: 14px; margin: 16px 0 6px; border-bottom: 2px solid #4F46E5; padding-bottom: 3px; }
+  #cetakLaporan .lp-sub { color: #555; margin: 0 0 10px; }
+  #cetakLaporan table { width: 100%; border-collapse: collapse; }
+  #cetakLaporan .lp-ring td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  #cetakLaporan .lp-ring small { display: block; color: #555; }
+  #cetakLaporan .lp-ring b { font-size: 13px; }
+  #cetakLaporan .lp-tabel th { background: #EEF0FF; text-align: left; padding: 5px 6px; border: 1px solid #ccc; }
+  #cetakLaporan .lp-tabel td { padding: 4px 6px; border: 1px solid #ddd; vertical-align: top; }
+  #cetakLaporan .kn { text-align: right; white-space: nowrap; }
+  #cetakLaporan tr { page-break-inside: avoid; }
+  #cetakLaporan tr.batal td { color: #999; text-decoration: line-through; }
+}
