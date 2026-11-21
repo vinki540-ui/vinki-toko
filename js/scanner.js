@@ -28,19 +28,30 @@
   let lanjutNanti = false;
 
   /* ---------- Bunyi & getar ---------- */
+  function desahAudio() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!audioCtx) audioCtx = new AC();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    } catch (e) { /* abaikan */ }
+  }
+
   function bip() {
     try {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (AC) {
         if (!audioCtx) audioCtx = new AC();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const o = audioCtx.createOscillator();
         const g = audioCtx.createGain();
-        o.frequency.value = 1100;
-        g.gain.value = 0.08;
+        o.frequency.value = 1800;
+        g.gain.value = 0.35;
         o.connect(g);
         g.connect(audioCtx.destination);
         o.start();
-        o.stop(audioCtx.currentTime + 0.09);
+        o.stop(audioCtx.currentTime + 0.14);
       }
     } catch (e) { /* abaikan */ }
     try { if (navigator.vibrate) navigator.vibrate(40); } catch (e) { /* abaikan */ }
@@ -221,6 +232,7 @@
   async function mulai(callback, op) {
     berhenti();
     panggil = callback;
+    desahAudio();
     opsi = op || {};
     kodeTerakhir = '';
     waktuTerakhir = 0;
