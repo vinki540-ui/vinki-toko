@@ -58,6 +58,60 @@
     }
   }
 
+  function idbBuka() {
+    return new Promise((ok, gagal) => {
+      try {
+        const r = indexedDB.open('vinki-cadangan-aktivasi', 1);
+        r.onupgradeneeded = () => r.result.createObjectStore('kv');
+        r.onsuccess = () => ok(r.result);
+        r.onerror = () => gagal(r.error);
+      } catch (e) { gagal(e); }
+    });
+  }
+
+  async function idbBaca(k) {
+    try {
+      const db = await idbBuka();
+      return await new Promise((ok) => {
+        const q = db.transaction('kv').objectStore('kv').get(k);
+        q.onsuccess = () => ok(q.result || '');
+        q.onerror = () => ok('');
+      });
+    } catch (e) { return ''; }
+  }
+
+  async function idbTulis(k, v) {
+    try {
+      const db = await idbBuka();
+      await new Promise((ok) => {
+        const tx = db.transaction('kv', 'readwrite');
+        tx.objectStore('kv').put(v, k);
+        tx.oncomplete = () => ok();
+        tx.onerror = () => ok();
+        tx.onabort = () => ok();
+      });
+    } catch (e) { /* abaikan */ }
+  }
+
+  // Pulihkan ID dan kode dari cadangan kalau penyimpanan utama kosong
+  async function pulihkan() {
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { /* abaikan */ }
+    for (const k of [K_ID, K_KODE]) {
+      if (!baca(k)) {
+        const v = await idbBaca(k);
+        if (v) tulis(k, v);
+      }
+    }
+  }
+
+  // Salin ID dan kode ke penyimpanan cadangan
+  async function cadangkan() {
+    for (const k of [K_ID, K_KODE]) {
+      const v = baca(k);
+      if (v) await idbTulis(k, v);
+    }
+  }
+
   function esc(t) {
     return String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
@@ -122,6 +176,7 @@
       aktif.disabled = false;
       if (!ok) { salah.textContent = 'Kode tidak cocok dengan perangkat ini. Pastikan kode utuh dan dibuat untuk ID di atas.'; return; }
       tulis(K_KODE, kode);
+      cadangkan();
       bukaApp();
     });
   }
@@ -142,6 +197,7 @@
 
   /* Mulai */
   (async function () {
+    await pulihkan();
     if (!window.isSecureContext || !window.crypto || !crypto.subtle) {
       tampilLayar();
       document.getElementById('kunciSalah').textContent = 'Buka app lewat alamat https (bukan file langsung).';
@@ -149,6 +205,7 @@
     }
     const id = ambilId();
     const kode = baca(K_KODE);
+    cadangkan();
     if (kode && await periksa(id, kode)) return;
     if (kode) { try { localStorage.removeItem(K_KODE); } catch (e) { /* abaikan */ } }
     tampilLayar();
