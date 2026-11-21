@@ -124,6 +124,7 @@
     if (!HALAMAN.includes(h)) h = 'beranda';
     halamanSekarang = h;
     document.body.classList.toggle('di-transaksi', h === 'transaksi');
+    document.body.classList.toggle('di-beranda', h === 'beranda');
     $$('.halaman').forEach((s) => s.classList.toggle('aktif', s.dataset.halaman === h));
     $$('.nav-item, .bn-item').forEach((b) => b.classList.toggle('aktif', b.dataset.nav === h));
     tutupSidebar();

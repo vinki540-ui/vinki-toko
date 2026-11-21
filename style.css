@@ -595,3 +595,9 @@ select#grafikRentang { width: auto; padding: 7px 10px; font-size: 13px; font-wei
 .kunci-btn.hijau { background: var(--hijau); color: #fff; font-size: 13px; }
 .kunci-btn.abu { background: var(--utama-muda); color: var(--utama); }
 .kunci-btn:disabled { opacity: .5; }
+/* Tombol Scan melayang hanya di Beranda */
+.fab-scan { display: none; }
+.di-beranda .fab-scan { display: flex; }
+@media (min-width: 900px) {
+  .di-beranda .fab-scan { display: none; }
+}
